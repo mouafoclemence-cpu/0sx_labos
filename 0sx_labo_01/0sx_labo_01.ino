@@ -4,14 +4,14 @@ const int NOMBREDECYCLE = 5;  //Avant dernier chiffre de mon numero etudiant 0 =
 int etat = 1;                 // État de la LED.
 int dureDunClignotement = 250;
 int luminositeMax = 255;
-int pause = 2048 /luminositeMax;
+int pause = 2048 / luminositeMax;
 int etatEteint = 250;
 int cycleAllume = 1000;
 
 
 void setup() {
-  Serial.begin(VITESSE);    //initialisation de la vitesse de communication
-  pinMode(LED, OUTPUT);  // configuration de la LED en mode sortie.
+  Serial.begin(VITESSE);  //initialisation de la vitesse de communication
+  pinMode(LED, OUTPUT);   // configuration de la LED en mode sortie.
 }
 
 
@@ -32,8 +32,8 @@ void loop() {
       break;
 
     case 2:
-      Serial.println("Variation  – 2438400");  // Affichage
-      for (int i = 0; i <= luminositeMax; i++) {         //l'intensite augmente de 1 a chaque passage apres une pause de 8ms.
+      Serial.println("Variation  – 2438400");     // Affichage
+      for (int i = 0; i <= luminositeMax; i++) {  //l'intensite augmente de 1 a chaque passage apres une pause de 8ms.
         analogWrite(LED, i);
         delay(pause);
       }
