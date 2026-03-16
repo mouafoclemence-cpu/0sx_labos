@@ -88,5 +88,3 @@ void loop() {
   lectureValeur();
   etatLeds();
 }
-
-
