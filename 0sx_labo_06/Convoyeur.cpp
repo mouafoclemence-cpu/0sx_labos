@@ -10,7 +10,7 @@ const int input2 = 47;
 LCD_I2C lcd(0x27, 16, 2);
 
 // --- DHT11 ---
-const int DHT_11 = 7;
+const int DHT_11 = 10;
 DHT dht(DHT_11, DHTTYPE);  //creation de l'objet DHT
 float temperature = 0;
 float humidite = 0;
@@ -321,7 +321,7 @@ void position() {
 //faire clignoter la LED
 void clignotementLed(unsigned long tempsActuel) {
   const unsigned long delaiLed = 100;
-  static bool etatLed = false;
+   bool etatLed = false;
   static unsigned long dernierTps = 0;
   if (etat_courant == OUVERTURE || etat_courant == FERMETURE) {
     if ((tempsActuel - dernierTps) >= delaiLed) {
@@ -491,24 +491,34 @@ void vanneLCD() {
 void afficherLCD(unsigned long tempsActuel) {
   unsigned long delaisRafraichissement = 250;
   static unsigned long dernierTemps = 0;
+  int valeurAlum = lireLuminosite();
   if ((tempsActuel - dernierTemps) >= delaisRafraichissement) {
     lcd.clear();
-    if (etat_courant == OUVERTURE || etat_courant == FERMETURE || etat_courant == ARRET || etat_courant == OUVERT || etat_courant == FERME) {
+    if (etat_courant == OUVERTURE || etat_courant == FERMETURE || etat_courant == ARRET) {
       vanneLCD();
     } else {
+
       switch (currentState) {
         case DEMARRAGE:
           lcd.setCursor(0, 0);
           lcd.print("Systeme pret   ");
           lcd.setCursor(0, 1);
           lcd.print("Appuyez btn    ");
+          lcd.print(" ");
+
           break;
+
         case LUM_DIST:
-          if (pageActuelle == 1) lumDist();
+          if (pageActuelle == 1) {
+            lumDist();
+          }
           break;
         case DHT_STATE:
-          if (pageActuelle == 1) tempHum();
+          if (pageActuelle == 1) {
+            tempHum();
+          }
           break;
+
         case CALIBRATION:
           MinMaxLCD();
           break;

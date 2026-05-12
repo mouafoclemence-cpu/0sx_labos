@@ -54,7 +54,4 @@ void loop() {
  
  gestionConvoyeur();
 
-  // Petite pause pour éviter de surcharger le processeur
-  delay(10);
-
 }
